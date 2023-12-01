@@ -1,7 +1,10 @@
 from time import sleep
 import random
 import pygame
+import sys
+
 pygame.init()
+pygame.mixer.init() 
 
 
 #loading all game images, including match result images:
@@ -15,27 +18,34 @@ choose=pygame.image.load('choose.jpg')
 win=pygame.image.load('win.jpg')
 tie=pygame.image.load('tie.jpg')
 again=pygame.image.load('again.jpg')
-rr=pygame.image.load("rr.jpg")
-rp=pygame.image.load("rp.jpg")
-rs=pygame.image.load("rs.jpg")
-pr=pygame.image.load("pr.jpg")
-pp=pygame.image.load("pp.jpg")
-ps=pygame.image.load("ps.jpg")
-sr=pygame.image.load("sr.jpg")
-sp=pygame.image.load("sp.jpg")
-ss=pygame.image.load("ss.jpg")
+rr=pygame.image.load("rr.jpg")          #when user input is rock and computer choice is rock
+rp=pygame.image.load("rp.jpg")          #when user input is rock and computer choice is paper
+rs=pygame.image.load("rs.jpg")          #when user input is rock and computer choice is scissor
+pr=pygame.image.load("pr.jpg")          #when user input is paper and computer choice is rock
+pp=pygame.image.load("pp.jpg")          #when user input is paper and computer choice is paper
+ps=pygame.image.load("ps.jpg")          #when user input is paper and computer choice is scissor
+sr=pygame.image.load("sr.jpg")          #when user input is scissor and computer choice is rock
+sp=pygame.image.load("sp.jpg")          #when user input is scissor and computer choice is paper
+ss=pygame.image.load("ss.jpg")          #when user input is scissor and computer choice is scissor
+
+#adding background music for the game
+def music():
+    pygame.mixer.init()
+    pygame.mixer.music.load('music.mp3')
+    pygame.mixer.music.play(-1)
+music()
 
 
 
-gameDisplay=pygame.display.set_mode((800,700))
-
+#setting up the game background first
+gameDisplay=pygame.display.set_mode((800,600))  #positioning the display screen
 gameDisplay.blit(background,(0,0))
 pygame.display.update()
-sleep(3)
+sleep(10)   #will show bg screen for 10 seconds
 
 
 
-#making use of function here
+#making use of function here (maing game function)
 
 def game():
     run=True
@@ -53,7 +63,7 @@ def game():
     #computer choice through random() built_in function, it will select through the list s.            
     s=['rock','paper','scissor']   #selecting the computer choice inside the game function so that whenever user wants to play again, the new value of C gets selected.
     computer=random.choice(s)
-
+    
 #giving conditions now on which choice to display which image, we designed these images through canva.com
 
     if key[pygame.K_r]==True and computer=='rock':
@@ -105,10 +115,10 @@ def game():
                 key=pygame.key.get_pressed()
                 if key[pygame.K_y]==True:
                     game()
-                else:
-                    run=False
+                if key[pygame.K_n]==True:
+                    exit()
+
                     
 
 game()
-
 
