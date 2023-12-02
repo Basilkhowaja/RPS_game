@@ -29,6 +29,26 @@ sp=pygame.image.load("sp.jpg")          #when user input is scissor and computer
 ss=pygame.image.load("ss.jpg")          #when user input is scissor and computer choice is scissor
 
 #adding background music for the game
+def playagain():
+
+    run=True
+    key=None
+    while run:
+        gameDisplay.blit(again,(0,0))
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            elif event.type==pygame.KEYDOWN:
+                key=pygame.key.get_pressed()
+                if key[pygame.K_y]==True:
+                    game()
+                if key[pygame.K_n]==True:
+                    pygame.quit()
+                    exit()
+                
+
 def music():
     pygame.mixer.init()
     pygame.mixer.music.load('music.mp3')
@@ -41,13 +61,15 @@ music()
 gameDisplay=pygame.display.set_mode((800,600))  #positioning the display screen
 gameDisplay.blit(background,(0,0))
 pygame.display.update()
-sleep(10)   #will show bg screen for 10 seconds
+sleep(5)   #will show bg screen for 10 seconds
 
 
 
 #making use of function here (maing game function)
 
+
 def game():
+
     run=True
     while run:
         gameDisplay.blit(choose,(0,0))
@@ -101,25 +123,11 @@ def game():
     elif key[pygame.K_s]==True and computer=='scissor':
         gameDisplay.blit(ss,(0,0))
         pygame.display.update()
-        sleep(5)
-    run=True
-    key=None
-    while run:
-        gameDisplay.blit(again,(0,0))
-        pygame.display.update()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
-            elif event.type==pygame.KEYDOWN:
-                key=pygame.key.get_pressed()
-                if key[pygame.K_y]==True:
-                    game()
-                if key[pygame.K_n]==True:
-                    exit()
+        sleep(5)  
 
-                    
+        
+            
+    playagain()  #calling playagain function here so that after 1st result code will be decided to run again or not on basis of user input
 
 game()
-
 
